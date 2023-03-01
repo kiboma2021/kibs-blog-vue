@@ -12,11 +12,18 @@
     <br> <br>
 
     <input type="text" v-model="Kibs.name">
+
+    <br> <br> <br>
+    <hr>
+    <input type="text" v-model="search">
+    <p>Search: {{ search }}</p>
+
+    <div v-for="name in matchingNames" :key="name">{{ name }}</div>
   </div>
 </template>
 
 <script>
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 export default {
   name: 'HomeView',
 
@@ -33,8 +40,14 @@ export default {
       kibs2.name = "Lagos Naigeria"
       kibs2.age = 100
     }
+    const search = ref('')
+    const names = ref(['Esther', 'Jane', 'Marion', 'Brian', 'James', 'Amos'])
 
-    return {Kibs, handleClick, kibs2, updateKibs2}
+    const matchingNames = computed(() => {
+      return names.value.filter((name) => name.includes(search.value))
+    })
+
+    return {Kibs, handleClick, kibs2, updateKibs2, names, search, matchingNames}
   }
 
 }
