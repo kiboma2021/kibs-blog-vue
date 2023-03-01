@@ -1,33 +1,40 @@
 <template>
   <div class="home">
-    <H1>This is my home page</H1>
-    <p ref="p">My name is {{ name }} and my age is {{ age }}</p><br>
+    <h1>This is my home page</h1>
+    <p ref="p">My name is {{ Kibs.name }} and my age is {{ Kibs.age }}</p><br>
 
-    <button @click="handleClick">Click me</button>
+    <h3>Reactive</h3>
+    <p>{{ kibs2.name }} - {{ kibs2.age }}</p>
+
+    <button @click="handleClick">Click me</button> <br>
+    <button @click="updateKibs2">Update kibs 2</button>
 
     <br> <br>
 
-    <input type="text" v-model="name">
+    <input type="text" v-model="Kibs.name">
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 export default {
   name: 'HomeView',
 
   setup(){
-    console.log("set up done ..")
-
-    const name = ref('Kiboma')
-    const age = ref(31)
-
+    const Kibs = ref({name: 'Kiboma', age: '31'})
+    const kibs2 = reactive({name: 'lagos', age: '65'})
+  
     const handleClick = () => {
-      name.value = "Benard"
-      age.value = 47
+      Kibs.value.name = "Benard"
+      Kibs.value.age = 47
     }
 
-    return {name, age, handleClick}
+    const updateKibs2 = () => {
+      kibs2.name = "Lagos Naigeria"
+      kibs2.age = 100
+    }
+
+    return {Kibs, handleClick, kibs2, updateKibs2}
   }
 
 }
