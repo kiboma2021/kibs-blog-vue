@@ -15,18 +15,15 @@ export default {
   setup(){
     console.log("set up done ..")
 
-    let name = 'Kiboma'
-    let age = 31
-
-    const p = ref(null)
+    const name = ref('Kiboma')
+    const age = ref(31)
 
     const handleClick = () => {
-      console.log(p, p.value)
-      p.value.classList.add('test')
-      p.value.textContent = 'Hello, text changed'
+      name.value = "Benard"
+      age.value = 47
     }
 
-    return {name, age, handleClick,p}
+    return {name, age, handleClick}
   }
 
 }
