@@ -1,13 +1,14 @@
 <template>
   <div class="home">
     <H1>This is my home page</H1>
-    <p>My name is {{ name }} and my age is {{ age }}</p><br>
+    <p ref="p">My name is {{ name }} and my age is {{ age }}</p><br>
 
     <button @click="handleClick">Click me</button>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   name: 'HomeView',
 
@@ -17,11 +18,15 @@ export default {
     let name = 'Kiboma'
     let age = 31
 
+    const p = ref(null)
+
     const handleClick = () => {
-      console.log("Clicked...")
+      console.log(p, p.value)
+      p.value.classList.add('test')
+      p.value.textContent = 'Hello, text changed'
     }
 
-    return {name, age, handleClick}
+    return {name, age, handleClick,p}
   }
 
 }
