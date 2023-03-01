@@ -4,6 +4,10 @@
     <p ref="p">My name is {{ name }} and my age is {{ age }}</p><br>
 
     <button @click="handleClick">Click me</button>
+
+    <br> <br>
+
+    <input type="text" v-model="name">
   </div>
 </template>
 
