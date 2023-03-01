@@ -15,6 +15,8 @@
 
     <br> <br> <br>
     <hr>
+    <button @click="stopWatching">Stop Watching</button>
+    <hr>
     <input type="text" v-model="search">
     <p>Search: {{ search }}</p>
 
@@ -23,7 +25,7 @@
 </template>
 
 <script>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive, ref, watch, watchEffect } from 'vue'
 export default {
   name: 'HomeView',
 
@@ -47,7 +49,23 @@ export default {
       return names.value.filter((name) => name.includes(search.value))
     })
 
-    return {Kibs, handleClick, kibs2, updateKibs2, names, search, matchingNames}
+
+    //Watch and Watch Effect
+   const myWatchfunction = watch(search, () => {
+      console.log("Watch funtion run on each search")
+    })
+
+    const myWatchEffectfunction = watchEffect(() => {
+      console.log("Watch watch effect run on each search", search.value)
+    })
+
+    const stopWatching = () => {
+      myWatchfunction()
+      myWatchEffectfunction()
+
+    }
+
+    return {Kibs, handleClick, kibs2, updateKibs2, names, search, matchingNames, stopWatching}
   }
 
 }
